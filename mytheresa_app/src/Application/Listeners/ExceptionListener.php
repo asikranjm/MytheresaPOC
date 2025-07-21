@@ -45,8 +45,14 @@ class ExceptionListener implements EventSubscriberInterface
             ],
         ];
 
-        $response = new JsonResponse($payload, $status);
+        $response = new JsonResponse($payload, $status, [
+            'Content-Type'                 => 'application/json',
+            'Access-Control-Allow-Methods' => 'GET, POST',
+            'Access-Control-Allow-Headers' => 'Content-Type',
+            'Vary'                         => 'Origin',
+        ]);
         $event->setResponse($response);
+        return $response;
     }
 
     public static function getSubscribedEvents(): array
