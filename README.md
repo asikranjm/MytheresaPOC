@@ -11,8 +11,8 @@ This project runs a Symfony app (PHP8.2 FPM + Nginx + Postgres) in Docker contai
 
 ### 1. **Clone the repo**
 ```
-   git clone https://github.com/asikranjm/mytheresa.git
-   cd mytheresa
+   git clone https://github.com/asikranjm/MytheresaPOC.git
+   cd MytheresaPOC
 ````
 
 ### 2. **Build & run containers**
@@ -48,13 +48,6 @@ php bin/phpunit
 docker compose down
 ````
 
-#### Notes
-
-For production setups, you’ll likely want to remove fixtures:load and handle migrations separately with:
-````
-php bin/console d:s:u --dump-sql --complete
-````
-
 # Architecture
 This application follows a hexagonal (ports & adapters) structure to keep domain logic clean and decoupled:
 
@@ -75,3 +68,16 @@ src/
 **UI**: exposes the functionality via HTTP (e.g. ProductListController), translates requests into application commands, and returns JSON responses.
 
 This separation ensures you can swap out frameworks, persistence layers, or external APIs without touching your domain logic.
+
+
+#### Notes
+
+For production setups, you’ll likely want to remove fixtures:load and handle migrations separately with:
+````
+php bin/console d:s:u --dump-sql --complete
+````
+The Postman collection Environments and EP are inside the repository with the files "Mytheresa API.postman_collection.json" and "MyTheresa-Local.postman_environment.json".
+
+### The Endpoint for products is:
+
+> http://localhost:8050/api/products?category=boots&priceLessThan=34000
