@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Domain\Product" table="product">
+        <id name="id" type="string">
+            <generator strategy="NONE"/>
+        </id>
+        <indexes>
+            <index name="product_id_idx" columns="id"/>
+            <index name="product_name_idx" columns="name"/>
+            <index name="product_price_idx" columns="price"/>
+        </indexes>
+        <field name="name" length="150"/>
+        <field name="sku" length="100"/>
+        <field name="price" type="decimal"/>
+        <field name="createdAt" type="datetime_immutable"/>
+        <field name="updatedAt" type="datetime_immutable"/>
+
+        <many-to-one field="category" target-entity="App\Domain\Category" inversed-by="products">
+            <join-column name="category_id" referenced-column-name="id"/>
+        </many-to-one>
+    </entity>
+
+</doctrine-mapping>
